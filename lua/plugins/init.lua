@@ -406,7 +406,7 @@ return
 			cmake_build_directory = "build/${variant:buildType}",
 			cmake_dap_configuration = {
 				name = "cpp",
-				type = "codelldb",
+				type = "cppdbg",
 				request = "launch",
 				stopOnEntry = false,
 				runInTerminal = true,
@@ -426,8 +426,4 @@ return
 			}
 		}
 	},
-	{
-		"sphamba/smear-cursor.nvim",
-		opts = {}
-	}
 }

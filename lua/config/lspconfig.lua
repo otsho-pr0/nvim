@@ -80,7 +80,7 @@ local x = vim.diagnostic.severity
 
 vim.diagnostic.config({
 	virtual_text = true,
-	signs = { text = { [x.ERROR] = "  ", [x.WARN] = "", [x.INFO] = "  ", [x.HINT] = "  " } },
+	signs = { text = { [x.ERROR] = "󰅙", [x.WARN] = "", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
 	underline = false,
 	float = { border = "single" },
 })
