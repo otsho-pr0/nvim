@@ -22,7 +22,7 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to the up window" })
 vim.keymap.set("t", "<C-x>", "<C-\\><C-N>", { desc = "Switch to normal mode" })
 vim.keymap.set({"n", "t"}, "<M-t>", "<cmd>ToggleTerm direction=float<CR>", { desc = "Toggle float terminal" })
 
-vim.keymap.set("n", "-", function () vim.cmd("Oil") end, { "Open Oil" });
+vim.keymap.set("n", "-", function () vim.cmd("Oil") end, { desc = "Open Oil" });
 
 vim.keymap.set("n", "<leader>r", function ()
 	local cmd = "!" .. vim.fn.input("Run: ", "", "file")
