@@ -102,43 +102,38 @@ return
 		opts = {}
 	},
 	{
-		"saghen/blink.cmp",
+		"hrsh7th/nvim-cmp",
+		dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" },
+		opts = function (_, opts)
+			local cmp = require("cmp")
 
-		version = "1.*",
+			opts.window = {
+				completion = {
+					border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+					winhighlight = 'Normal:CmpPmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+				},
+				documentation = {
+					border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+					winhighlight = 'Normal:CmpPmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+				}
+			}
 
-		---@module "blink.cmp"
-		---@type blink.cmp.Config
-		opts = {
-			keymap = {
-				preset = "default",
+			opts.mapping = cmp.mapping.preset.insert({
+				['<C-j>'] = cmp.mapping.select_next_item(),
+				['<C-k>'] = cmp.mapping.select_prev_item(),
+				['<C-p>'] = cmp.mapping.scroll_docs(-4),
+				['<C-n>'] = cmp.mapping.scroll_docs(4),
+				['<C-Space>'] = cmp.mapping.complete(),
+				['<C-e>'] = cmp.mapping.abort(),
+				['<Tab>'] = cmp.mapping.confirm({ select = true })
+			})
 
-				["<Tab>"] = { "accept", "fallback" },
-
-				["<C-k>"] = { "select_prev", "fallback" },
-				["<C-j>"] = { "select_next", "fallback" },
-
-				["<C-space>"] = { function(cmp) cmp.show() end },
-			},
-
-			appearance = {
-				nerd_font_variant = "normal"
-			},
-
-			completion =
-			{
-				documentation = { auto_show = true },
-				ghost_text = { enabled = true }
-			},
-
-			sources = {
-				default = { "lsp", "path", "buffer" },
-			},
-
-			signature = { enabled = true },
-
-			fuzzy = { implementation = "prefer_rust_with_warning" }
-		},
-		opts_extend = { "sources.default" }
+			opts.sources = cmp.config.sources({
+				{ name = 'nvim_lsp' }
+			}, {
+				{ name = 'buffer' }
+			})
+		end
 	},
 	{
 		"mfussenegger/nvim-dap",
