@@ -102,38 +102,43 @@ return
 		opts = {}
 	},
 	{
-		"hrsh7th/nvim-cmp",
-		dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" },
-		opts = function (_, opts)
-			local cmp = require("cmp")
+		"saghen/blink.cmp",
 
-			opts.window = {
-				completion = {
-					border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-					winhighlight = 'Normal:CmpPmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
-				},
-				documentation = {
-					border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-					winhighlight = 'Normal:CmpPmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
-				}
-			}
+		version = "1.*",
 
-			opts.mapping = cmp.mapping.preset.insert({
-				['<C-j>'] = cmp.mapping.select_next_item(),
-				['<C-k>'] = cmp.mapping.select_prev_item(),
-				['<C-p>'] = cmp.mapping.scroll_docs(-4),
-				['<C-n>'] = cmp.mapping.scroll_docs(4),
-				['<C-Space>'] = cmp.mapping.complete(),
-				['<C-e>'] = cmp.mapping.abort(),
-				['<Tab>'] = cmp.mapping.confirm({ select = true })
-			})
+		---@module "blink.cmp"
+		---@type blink.cmp.Config
+		opts = {
+			keymap = {
+				preset = "default",
 
-			opts.sources = cmp.config.sources({
-				{ name = 'nvim_lsp' }
-			}, {
-				{ name = 'buffer' }
-			})
-		end
+				["<Tab>"] = { "accept", "fallback" },
+
+				["<C-k>"] = { "select_prev", "fallback" },
+				["<C-j>"] = { "select_next", "fallback" },
+
+				["<C-space>"] = { function(cmp) cmp.show() end },
+			},
+
+			appearance = {
+				nerd_font_variant = "normal"
+			},
+
+			completion =
+			{
+				documentation = { auto_show = true },
+				ghost_text = { enabled = true }
+			},
+
+			sources = {
+				default = { "lsp", "path", "buffer" },
+			},
+
+			signature = { enabled = true },
+
+			fuzzy = { implementation = "prefer_rust_with_warning" }
+		},
+		opts_extend = { "sources.default" }
 	},
 	{
 		"mfussenegger/nvim-dap",
@@ -405,6 +410,31 @@ return
 					}
 				}
 			}
+		}
+	},
+	{
+
+		"chrisgrieser/nvim-origami",
+		event = "VeryLazy",
+		opts = {},
+		init = function()
+			vim.opt.foldlevel = 99
+			vim.opt.foldlevelstart = 99
+		end
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {},
+		keys =
+		{
+			{ "]h", "<cmd>Gitsigns nav_hunk next<CR>" },
+			{ "[h", "<cmd>Gitsigns nav_hunk prev<CR>" },
+			{ "<leader>ghp", "<cmd>Gitsigns preview_hunk<CR>" },
+			{ "<leader>ghs", "<cmd>Gitsigns stage_hunk<CR>" },
+			{ "<leader>ghu", "<cmd>Gitsigns undo_stage_hunk<CR>" },
+			{ "<leader>gbs", "<cmd>Gitsigns stage_buffer<CR>" },
+			{ "<leader>gbr", "<cmd>Gitsigns reset_buffer<CR>" }
 		}
 	}
 }

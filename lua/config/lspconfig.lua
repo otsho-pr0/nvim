@@ -28,7 +28,7 @@ local servers = {
 		},
 	},
 	clangd = {
-		cmd = { "clangd", "--background-index", "--header-insertion=never" },
+		cmd = { "clangd", "--background-index", "--header-insertion=never", "--function-arg-placeholders=0" },
 	},
 	zls = {},
 	slangd = {},
@@ -40,7 +40,7 @@ local servers = {
 }
 
 vim.lsp.config("*", {
-	capabilities = require('cmp_nvim_lsp').default_capabilities(),
+	capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
 
 local servers_to_enable = {}
