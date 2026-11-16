@@ -35,13 +35,13 @@ return
 			bigfile = { enabled = true },
 			dashboard = { enabled = true },
 			explorer = { enabled = true },
-			indent = { enabled = true },
+			indent = { enabled = false },
 			input = { enabled = true },
 			picker = { enabled = true },
 			notifier = { enabled = true },
 			quickfile = { enabled = true },
 			scope = { enabled = true },
-			scroll = { enabled = true },
+			scroll = { enabled = false },
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
 		},
@@ -99,43 +99,19 @@ return
 			{ "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
 			{ "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
 			{ "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
-			{ "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-			{ "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
-			{ "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
+			{ "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto Type Definition" },
+			{ "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "Calls Incoming" },
+			{ "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "Calls Outgoing" },
 			{ "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
 			{ "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 			{ "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-			{ "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
 			{ "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
 			{ "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
 			{ "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
 			{ "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
 			{ "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
 			{ "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
-			{ "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-			{ "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
-			{ "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
-			{ "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
-			{ "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
-			{ "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
-			{
-				"<leader>N",
-				desc = "Neovim News",
-				function()
-					Snacks.win({
-						file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-						width = 0.6,
-						height = 0.6,
-						wo = {
-							spell = false,
-							wrap = false,
-							signcolumn = "yes",
-							statuscolumn = " ",
-							conceallevel = 3,
-						},
-					})
-				end,
-			}
+			{ "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" }
 		}
 	},
 	{
@@ -403,15 +379,6 @@ return
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
 		lazy = false,
-	},
-	{
-		"nvim-tree/nvim-tree.lua",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		keys = { { "<C-n>", "<cmd>NvimTreeToggle<CR>" } },
-		opts =
-		{
-			renderer = { root_folder_label = false }
-		}
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",

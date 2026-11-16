@@ -9,7 +9,7 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true
 vim.opt.termguicolors = true
--- vim.opt.scrolloff = 8
+vim.opt.scrolloff = 8
 
 vim.o.cursorline = true
 vim.o.showmode = false

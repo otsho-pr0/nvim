@@ -29,8 +29,6 @@ vim.keymap.set("n", "<leader>r", function ()
 	vim.cmd(cmd)
 end, { desc = "Run" })
 
-vim.keymap.set("n", "<leader>bd", "<cmd>bp | bd #<CR>", { desc = "Close current buffer" })
-
 vim.keymap.set("n", "<leader>sh", "<cmd>LspClangdSwitchSourceHeader<CR>", { desc = "Switch Between Source/Header" })
 
 vim.keymap.set("n", "<leader>si", "<cmd>LspClangdShowSymbolInfo<CR>", { desc = "Show Symbol Info" })
