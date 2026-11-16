@@ -18,6 +18,7 @@ local servers = {
 					checkThirdParty = false,
 					library = {
 						vim.fn.expand "$VIMRUNTIME/lua",
+						vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
 						"${3rd}/luv/library",
 						vim.uv.cwd(),
 					},
@@ -58,8 +59,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local function opts(desc)
 			return { buffer = bufnr, remap = false, desc = "LSP " .. desc }
 		end
-		vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts("Go to next diagnostic"))
-		vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts("Go to prev diagnostic"))
+
+		vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
+		vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
+		vim.keymap.set("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts("List workspace folders"))
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
+		vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts("Rename"))
+		vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts("Signature help"))
+		vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts("Go to prev diagnostic"))
+		vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts("Go to next diagnostic"))
 	end,
 })
 
