@@ -196,20 +196,16 @@ return
 		---@module "blink.cmp"
 		---@type blink.cmp.Config
 		opts = {
-			keymap = {
+			keymap =
+			{
 				preset = "default",
-
 				["<Tab>"] = { "accept", "fallback" },
-
 				["<C-k>"] = { "select_prev", "fallback" },
 				["<C-j>"] = { "select_next", "fallback" },
-
-				["<C-space>"] = { function(cmp) cmp.show() end },
+				["<C-Space>"] = { "show", "show_documentation", "hide_documentation" }
 			},
 
-			appearance = {
-				nerd_font_variant = "normal"
-			},
+			appearance = { nerd_font_variant = "normal" },
 
 			completion =
 			{
@@ -217,7 +213,8 @@ return
 				ghost_text = { enabled = true }
 			},
 
-			sources = {
+			sources =
+			{
 				default = { "lsp", "path", "buffer" },
 			},
 
@@ -443,7 +440,8 @@ return
 			{ "<leader>cr", "<cmd>CMakeRun<CR>" },
 			{ "<leader>cd", "<cmd>CMakeDebug<CR>" },
 		},
-		opts = {
+		opts =
+		{
 			cmake_use_preset = true,
 			cmake_regenerate_on_save = true,
 			cmake_generate_options = { "-G Ninja", "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON" },
@@ -455,18 +453,6 @@ return
 				stopOnEntry = false,
 				runInTerminal = true,
 				console = "integratedTerminal"
-			},
-			cmake_runner = {
-				name = "toggleterm",
-				opts = {},
-				default_opts = {
-					toggleterm = {
-						direction = "float",
-						close_on_exit = false,
-						auto_scroll = true,
-						singleton = true
-					}
-				}
 			}
 		}
 	},
